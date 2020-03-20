@@ -9,21 +9,15 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'blocs/blocs.dart';
 import 'main_screen.dart';
 
-class UpperMobileLayout extends StatefulWidget {
+class UpperMobileLayout extends StatelessWidget {
   const UpperMobileLayout(this.character);
 
   final int character;
 
   @override
-  _UpperMobileLayoutState createState() => _UpperMobileLayoutState();
-}
-
-class _UpperMobileLayoutState extends State<UpperMobileLayout> {
-  final controller = PageController(viewportFraction: 0.8);
-
-  @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
+    final controller = PageController(viewportFraction: 0.8);
 
     return Column(
       children: <Widget>[
@@ -36,7 +30,7 @@ class _UpperMobileLayoutState extends State<UpperMobileLayout> {
                 margin: EdgeInsets.only(right: 8),
                 clipBehavior: Clip.antiAlias,
                 color: Colors.black,
-                child: SelectableItems(widget.character),
+                child: SelectableItems(character),
               ),
               Card(
                 margin: EdgeInsets.only(left: 8),

@@ -4,7 +4,6 @@ import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:fastdarktheme/example/blocs/blocs.dart';
-import 'package:fastdarktheme/example/util/color_util.dart';
 import 'package:fastdarktheme/example/util/constants.dart';
 import 'package:hsluv/hsluvcolor.dart';
 import 'package:rxdart/rxdart.dart';
@@ -125,7 +124,9 @@ class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
 //    }
   }
 
-  Stream<SelectionState> _mapUpdateAllToState(UpdateAllSelectedColors load) async* {
+  Stream<SelectionState> _mapUpdateAllToState(
+    UpdateAllSelectedColors load,
+  ) async* {
     final currentState = state as LoadedSelectionState;
 
     final Map<String, Color> allRgb = Map.from(currentState.rgbColors);
@@ -141,19 +142,6 @@ class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
       convertToHSLuv(allRgb),
       currentState.mode,
     );
-  }
-
-  Color findColor(Map<String, Color> mappedList, String category) {
-    if (category == kBackground) {
-      return blendColorWithBackground(mappedList[kPrimary]);
-    } else if (category == kSurface) {
-      final luv = HSLuvColor.fromColor(mappedList[kBackground]);
-      return luv.withLightness(luv.lightness + 5).toColor();
-    } else if (category == kSecondary) {
-      return mappedList[kPrimary];
-    }
-
-    return const Color(0xffffffff);
   }
 
   Map<String, HSLuvColor> convertToHSLuv(Map<String, Color> updatableMap) {

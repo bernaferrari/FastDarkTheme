@@ -15,14 +15,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'picker/hue_picker.dart';
 import 'util/constants.dart';
 
-class MainScreen extends StatefulWidget {
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
+const List<String> selectable = ["Twitter", "WhatsApp", "Shazam"];
 
-final List<String> selectable = ["Twitter", "WhatsApp", "Shazam"];
-
-class _MainScreenState extends State<MainScreen> {
+class MainScreen extends StatelessWidget {
   final bool contrastMode = true;
   final int currentSegment = 0;
 
