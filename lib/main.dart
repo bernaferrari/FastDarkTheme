@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
         },
       },
       theme: ThemeData(
-        typography: Typography.material2018().copyWith(
+        typography: Typography.material2018(
           black: Typography.dense2018,
           tall: Typography.tall2018,
           englishLike: Typography.englishLike2018,

@@ -6,17 +6,11 @@ import 'package:bloc/bloc.dart';
 import 'package:fastdarktheme/example/blocs/blocs.dart';
 import 'package:fastdarktheme/example/util/constants.dart';
 import 'package:hsluv/hsluvcolor.dart';
-import 'package:rxdart/rxdart.dart';
 
 import './selection.dart';
 
 class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
   SelectionBloc();
-
-  @override
-  Stream<SelectionState> transformEvents(events, next) {
-    return events.switchMap(next);
-  }
 
   @override
   SelectionState get initialState {
