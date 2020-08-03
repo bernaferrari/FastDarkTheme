@@ -8,7 +8,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'blocs/color/color_bloc.dart';
 import 'blocs/color/color_event.dart';
-import 'main_screen.dart';
+import 'blocs/mode.dart';
 
 class UpperMobileLayout extends StatelessWidget {
   const UpperMobileLayout(this.character);
@@ -67,13 +67,20 @@ class SelectableItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectable = Mode.values;
+
+    // the output of enum is Mode.WhatsApp, so remove the beginning.
+    final strSelectable = selectable
+        .map((d) => d.toString().replaceFirst("Mode.", ""))
+        .toList(growable: false);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         for (int i = 0; i < selectable.length; i++)
           RadioListTile<int>(
-            title: Text(selectable[i]),
+            title: Text(strSelectable[i]),
             value: i,
             groupValue: character,
             activeColor: Theme.of(context).colorScheme.primary,

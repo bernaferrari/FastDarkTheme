@@ -12,10 +12,9 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'blocs/mode.dart';
 import 'picker/hue_picker.dart';
 import 'util/constants.dart';
-
-const List<String> selectable = ["Twitter", "WhatsApp", "Shazam"];
 
 class MainScreen extends StatelessWidget {
   final bool contrastMode = true;
@@ -26,7 +25,6 @@ class MainScreen extends StatelessWidget {
     return BlocBuilder<ColorBloc, ColorState>(
         builder: (BuildContext builderContext, ColorState state) {
       if (state is ColorInitialState) {
-        BlocProvider.of<ColorBloc>(context).add(ColorLoadInitial());
         return SizedBox();
       }
 
@@ -38,7 +36,7 @@ class MainScreen extends StatelessWidget {
 
       final primaryLuv = currentState.hsluvColors[kPrimary];
 
-      final int _character = selectable.indexOf(currentState.mode);
+      final int _character = Mode.values.indexOf(currentState.mode);
 
       return Theme(
         data: ThemeData.from(

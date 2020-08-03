@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:hsluv/hsluvcolor.dart';
 
+import '../mode.dart';
+
 abstract class ColorEvent extends Equatable {
   const ColorEvent();
 
@@ -21,7 +23,7 @@ class ColorUpdateSingle extends ColorEvent {
 
   final Color color;
   final HSLuvColor hsLuvColor;
-  final String mode;
+  final Mode mode;
 
   @override
   String toString() => "UpdateColor... $color | $mode | $hsLuvColor";

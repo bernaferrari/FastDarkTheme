@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:fastdarktheme/example/util/constants.dart';
 import 'package:hsluv/hsluvcolor.dart';
 
+import '../mode.dart';
 import 'color.dart';
 
 class ColorBloc extends Bloc<ColorEvent, ColorState> {
@@ -28,7 +29,7 @@ class ColorBloc extends Bloc<ColorEvent, ColorState> {
     final Map<String, Color> allRgb = {kPrimary: Color(0xff00AB9A)};
     final Map<String, HSLuvColor> allLuv = convertToHSLuv(allRgb);
 
-    const mode = "WhatsApp";
+    const mode = Mode.WhatsApp;
 
     convertColors(allLuv, allRgb, mode);
 
@@ -82,9 +83,9 @@ class ColorBloc extends Bloc<ColorEvent, ColorState> {
   void convertColors(
     Map<String, HSLuvColor> allLuv,
     Map<String, Color> allRgb,
-    String mode,
+    Mode mode,
   ) {
-    if (mode == "WhatsApp") {
+    if (mode == Mode.WhatsApp) {
       final hue1 = (allLuv[kPrimary].hue + 30) % 360;
       allLuv[kSurface] = HSLuvColor.fromHSL(hue1, 40, 10);
       allRgb[kSurface] = allLuv[kSurface].toColor();
@@ -92,7 +93,7 @@ class ColorBloc extends Bloc<ColorEvent, ColorState> {
       final double hue2 = (allLuv[kPrimary].hue + 35) % 360;
       allLuv[kBackground] = HSLuvColor.fromHSL(hue2, 40, 5);
       allRgb[kBackground] = allLuv[kBackground].toColor();
-    } else if (mode == "Twitter") {
+    } else if (mode == Mode.Twitter) {
       final double hue = (allLuv[kPrimary].hue + 10) % 360;
 
       allLuv[kSurface] = HSLuvColor.fromHSL(hue, 35, 15);
@@ -100,7 +101,7 @@ class ColorBloc extends Bloc<ColorEvent, ColorState> {
 
       allLuv[kBackground] = HSLuvColor.fromHSL(hue, 30, 10);
       allRgb[kBackground] = allLuv[kBackground].toColor();
-    } else if (mode == "Shazam") {
+    } else if (mode == Mode.Shazam) {
       final double hue = math.max(allLuv[kPrimary].hue - 38, 0);
 
       allLuv[kSurface] = HSLuvColor.fromHSL(hue, 55, 10);

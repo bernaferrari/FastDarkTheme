@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:hsluv/hsluvcolor.dart';
 
+import '../mode.dart';
+
 abstract class ColorState extends Equatable {
   const ColorState();
 
@@ -21,7 +23,7 @@ class LoadedColorState extends ColorState {
 
   final Map<String, Color> rgbColors;
   final Map<String, HSLuvColor> hsluvColors;
-  final String mode;
+  final Mode mode;
 
   @override
   String toString() => 'MDCLoadedState state with selected: $mode';
