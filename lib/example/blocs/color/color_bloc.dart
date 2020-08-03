@@ -3,17 +3,28 @@ import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
-import 'package:fastdarktheme/example/blocs/blocs.dart';
 import 'package:fastdarktheme/example/util/constants.dart';
 import 'package:hsluv/hsluvcolor.dart';
 
-import './selection.dart';
+import 'color.dart';
 
-class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
-  SelectionBloc();
+class ColorBloc extends Bloc<ColorEvent, ColorState> {
+  ColorBloc() : super(ColorInitialState());
 
   @override
-  SelectionState get initialState {
+  Stream<ColorState> mapEventToState(
+    ColorEvent event,
+  ) async* {
+    if (event is ColorLoadInitial) {
+      yield* _mapInitialToState(event);
+    } else if (event is ColorUpdateAll) {
+      yield* _mapAllToState(event);
+    } else if (event is ColorUpdateSingle) {
+      yield* _mapSingleToState(event);
+    }
+  }
+
+  Stream<ColorState> _mapInitialToState(ColorLoadInitial load) async* {
     final Map<String, Color> allRgb = {kPrimary: Color(0xff00AB9A)};
     final Map<String, HSLuvColor> allLuv = convertToHSLuv(allRgb);
 
@@ -21,26 +32,15 @@ class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
 
     convertColors(allLuv, allRgb, mode);
 
-    return LoadedSelectionState(
+    yield LoadedColorState(
       allRgb,
       allLuv,
       mode,
     );
   }
 
-  @override
-  Stream<SelectionState> mapEventToState(
-    SelectionEvent event,
-  ) async* {
-    if (event is UpdateAllSelectedColors) {
-      yield* _mapUpdateAllToState(event);
-    } else if (event is UpdateSelectedColor) {
-      yield* _mapUpdateToState(event);
-    }
-  }
-
-  Stream<SelectionState> _mapUpdateToState(UpdateSelectedColor load) async* {
-    final currentState = state as LoadedSelectionState;
+  Stream<ColorState> _mapSingleToState(ColorUpdateSingle load) async* {
+    final currentState = state as LoadedColorState;
 
     final Map<String, HSLuvColor> allLuv = Map.from(currentState.hsluvColors);
     final Map<String, Color> allRgb = Map.from(currentState.rgbColors);
@@ -68,11 +68,11 @@ class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
 //      allLuv[kPrimary] = HSLuvColor.fromColor(allRgb[kPrimary]);
     }
 
-    final mode = load.mode ?? (state as LoadedSelectionState).mode;
+    final mode = load.mode ?? (state as LoadedColorState).mode;
 
     convertColors(allLuv, allRgb, mode);
 
-    yield LoadedSelectionState(
+    yield LoadedColorState(
       allRgb,
       allLuv,
       mode,
@@ -118,10 +118,8 @@ class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
 //    }
   }
 
-  Stream<SelectionState> _mapUpdateAllToState(
-    UpdateAllSelectedColors load,
-  ) async* {
-    final currentState = state as LoadedSelectionState;
+  Stream<ColorState> _mapAllToState(ColorUpdateAll load,) async* {
+    final currentState = state as LoadedColorState;
 
     final Map<String, Color> allRgb = Map.from(currentState.rgbColors);
 
@@ -131,7 +129,7 @@ class SelectionBloc extends Bloc<SelectionEvent, SelectionState> {
       i += 1;
     });
 
-    yield LoadedSelectionState(
+    yield LoadedColorState(
       allRgb,
       convertToHSLuv(allRgb),
       currentState.mode,

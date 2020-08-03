@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:fastdarktheme/example/blocs/color/color.dart';
 import 'package:fastdarktheme/example/main_screen.dart';
 import 'package:fastdarktheme/example/util/constants.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,10 +8,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'example/blocs/blocs.dart';
-import 'example/blocs/selection/selection_bloc.dart';
 
 Future<void> main() async {
-  BlocSupervisor.delegate = SimpleBlocDelegate();
+  Bloc.observer = SimpleBlocObserver();
   runApp(MainApp());
 }
 
@@ -21,7 +21,7 @@ class MainApp extends StatelessWidget {
       routes: {
         "/": (context) {
           return BlocProvider(
-            create: (context) => SelectionBloc(),
+            create: (context) => ColorBloc()..add(ColorLoadInitial()),
             child: MainScreen(),
           );
         },

@@ -1,4 +1,4 @@
-import 'package:fastdarktheme/example/blocs/blocs.dart';
+import 'package:fastdarktheme/example/blocs/color/color.dart';
 import 'package:fastdarktheme/example/preview/shazam_preview.dart';
 import 'package:fastdarktheme/example/preview/twitter_preview.dart';
 import 'package:fastdarktheme/example/preview/whatsapp_preview.dart';
@@ -23,16 +23,22 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SelectionBloc, SelectionState>(
-        builder: (BuildContext builderContext, SelectionState state) {
-      final primary = (state as LoadedSelectionState).rgbColors[kPrimary];
-      final background = (state as LoadedSelectionState).rgbColors[kBackground];
-      final surface = (state as LoadedSelectionState).rgbColors[kSurface];
+    return BlocBuilder<ColorBloc, ColorState>(
+        builder: (BuildContext builderContext, ColorState state) {
+      if (state is ColorInitialState) {
+        BlocProvider.of<ColorBloc>(context).add(ColorLoadInitial());
+        return SizedBox();
+      }
 
-      final primaryLuv = (state as LoadedSelectionState).hsluvColors[kPrimary];
+      final currentState = (state as LoadedColorState);
 
-      final int _character =
-          selectable.indexOf((state as LoadedSelectionState).mode);
+      final primary = currentState.rgbColors[kPrimary];
+      final background = currentState.rgbColors[kBackground];
+      final surface = currentState.rgbColors[kSurface];
+
+      final primaryLuv = currentState.hsluvColors[kPrimary];
+
+      final int _character = selectable.indexOf(currentState.mode);
 
       return Theme(
         data: ThemeData.from(

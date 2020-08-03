@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hsluv/hsluvcolor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'blocs/blocs.dart';
+import 'blocs/color/color_bloc.dart';
+import 'blocs/color/color_event.dart';
 import 'main_screen.dart';
 
 class UpperMobileLayout extends StatelessWidget {
@@ -77,8 +78,8 @@ class SelectableItems extends StatelessWidget {
             groupValue: character,
             activeColor: Theme.of(context).colorScheme.primary,
             onChanged: (int value) {
-              BlocProvider.of<SelectionBloc>(context).add(
-                UpdateSelectedColor(
+              BlocProvider.of<ColorBloc>(context).add(
+                ColorUpdateSingle(
                   mode: selectable[i],
                 ),
               );

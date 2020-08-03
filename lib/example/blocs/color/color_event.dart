@@ -3,12 +3,17 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:hsluv/hsluvcolor.dart';
 
-abstract class SelectionEvent extends Equatable {
-  const SelectionEvent();
+abstract class ColorEvent extends Equatable {
+  const ColorEvent();
+
+  @override
+  List<Object> get props => [];
 }
 
-class UpdateSelectedColor extends SelectionEvent {
-  const UpdateSelectedColor({
+class ColorLoadInitial extends ColorEvent {}
+
+class ColorUpdateSingle extends ColorEvent {
+  const ColorUpdateSingle({
     this.color,
     this.hsLuvColor,
     this.mode,
@@ -19,21 +24,21 @@ class UpdateSelectedColor extends SelectionEvent {
   final String mode;
 
   @override
-  String toString() => "MDCUpdateColor... $color | $mode | $hsLuvColor";
+  String toString() => "UpdateColor... $color | $mode | $hsLuvColor";
 
   @override
   List<Object> get props => [color, hsLuvColor, mode];
 }
 
-class UpdateAllSelectedColors extends SelectionEvent {
-  const UpdateAllSelectedColors({
+class ColorUpdateAll extends ColorEvent {
+  const ColorUpdateAll({
     this.colors,
   });
 
   final List<Color> colors;
 
   @override
-  String toString() => "MDCUpdateAllEvent... $colors";
+  String toString() => "UpdateAllEvent... $colors";
 
   @override
   List<Object> get props => [colors];

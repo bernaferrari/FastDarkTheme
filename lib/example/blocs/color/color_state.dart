@@ -3,12 +3,17 @@ import 'dart:ui';
 import 'package:equatable/equatable.dart';
 import 'package:hsluv/hsluvcolor.dart';
 
-abstract class SelectionState extends Equatable {
-  const SelectionState();
+abstract class ColorState extends Equatable {
+  const ColorState();
+
+  @override
+  List<Object> get props => [];
 }
 
-class LoadedSelectionState extends SelectionState {
-  const LoadedSelectionState(
+class ColorInitialState extends ColorState {}
+
+class LoadedColorState extends ColorState {
+  const LoadedColorState(
     this.rgbColors,
     this.hsluvColors,
     this.mode,

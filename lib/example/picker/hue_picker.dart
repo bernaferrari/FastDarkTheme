@@ -1,5 +1,4 @@
 import 'package:fastdarktheme/example/blocs/blocs.dart';
-import 'package:fastdarktheme/example/blocs/selection/selection_event.dart';
 import 'package:fastdarktheme/example/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,8 +30,8 @@ class HuePicker extends StatelessWidget {
   }
 
   void contrastColorSelected(BuildContext context, HSLuvColor color) {
-    BlocProvider.of<SelectionBloc>(context).add(
-      UpdateSelectedColor(
+    BlocProvider.of<ColorBloc>(context).add(
+      ColorUpdateSingle(
         hsLuvColor:
             HSLuvColor.fromHSL(color.hue, color.saturation, color.lightness),
       ),
