@@ -6,7 +6,7 @@ You can select the Hue value you want, and the project will select everything el
 
 [TRY IT HERE](https://bernaferrari.github.io/fastdarktheme/)
 
-[<p align="center"><img src="assets/preview.png" alt="Fast Dark Theme" height="400px"></p>](https://bernaferrari.github.io/fastdarktheme/)
+[<p align="center"><img src="assets/preview.png" alt="Fast Dark Theme"></p>](https://bernaferrari.github.io/fastdarktheme/)
 
 I used a standard color picker to capture primary, surface and background color for these apps and converted them to HSLuv in my [Color Studio](https://github.com/bernaferrari/color-studio) app.
 This project doesn't have a 100% fidelity with them, but is close enough - Shazam's background, for instance, has a luminescence of 4. That was rounded to 5.
