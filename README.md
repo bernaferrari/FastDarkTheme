@@ -1,10 +1,11 @@
-<p align="center"><img src="assets/icon.png" alt="Fast Dark Theme" height="200px"></p>
+![Image of Fast Dark Theme](assets/head.png)
 
 # Fast Dark Theme
+
 This project is a Flutter web experiment. It allows you to prototype dark mode colors based on popular apps: WhatsApp, Twitter and Shazam.
 You can select the Hue value you want, and the project will select everything else.
 
-[TRY IT HERE](https://bernaferrari.github.io/fastdarktheme/)
+<a href="https://bernaferrari.github.io/fastdarktheme"><img src="assets/try_here.png" height="50"/></a>
 
 [<p align="center"><img src="assets/preview.png" alt="Fast Dark Theme"></p>](https://bernaferrari.github.io/fastdarktheme/)
 
@@ -14,7 +15,7 @@ This project doesn't have a 100% fidelity with them, but is close enough - Shaza
 The idea is to help anyone build a coherent theme by modifying successful ones. The logic behind those themes is the most interesting part.
 
 - Hue: always changes from Primary to Background/Surface, from 7 (Twitter) to 38 (Shazam).
-- Saturation: can change from Primary to Background and can change from Background to Surface. Twitter and WhatsApp keeps Background and Surface the same. Shazam keeps Primary and Background the same, but changes Surface. 
+- Saturation: can change from Primary to Background and can change from Background to Surface. Twitter and WhatsApp keeps Background and Surface the same. Shazam keeps Primary and Background the same, but changes Surface.
 - Luminescence: Surface and Background always get a difference of 5.
 
 ## Reporting Issues
