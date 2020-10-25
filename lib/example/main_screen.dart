@@ -1,4 +1,3 @@
-import 'package:fastdarktheme/example/blocs/color/color.dart';
 import 'package:fastdarktheme/example/preview/shazam_preview.dart';
 import 'package:fastdarktheme/example/preview/twitter_preview.dart';
 import 'package:fastdarktheme/example/preview/whatsapp_preview.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'blocs/color_cubit.dart';
 import 'blocs/mode.dart';
 import 'picker/hue_picker.dart';
 import 'util/constants.dart';
@@ -22,21 +22,15 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ColorBloc, ColorState>(
+    return BlocBuilder<ColorCubit, ColorState>(
         builder: (BuildContext builderContext, ColorState state) {
-      if (state is ColorInitialState) {
-        return SizedBox();
-      }
+      final primary = state.rgbColors[kPrimary];
+      final background = state.rgbColors[kBackground];
+      final surface = state.rgbColors[kSurface];
 
-      final currentState = (state as LoadedColorState);
+      final primaryLuv = state.hsluvColors[kPrimary];
 
-      final primary = currentState.rgbColors[kPrimary];
-      final background = currentState.rgbColors[kBackground];
-      final surface = currentState.rgbColors[kSurface];
-
-      final primaryLuv = currentState.hsluvColors[kPrimary];
-
-      final int _character = Mode.values.indexOf(currentState.mode);
+      final int _character = Mode.values.indexOf(state.mode);
 
       return Theme(
         data: ThemeData.from(
@@ -116,17 +110,12 @@ class MainScreen extends StatelessWidget {
                       if (MediaQuery.of(context).size.width > 650)
                         Row(
                           children: <Widget>[
-                            Expanded(
-                              child: Card(
-                                margin: EdgeInsets.symmetric(horizontal: 16),
-                                clipBehavior: Clip.antiAlias,
-                                color: surface,
-                                elevation: 0,
-                                child: TwitterPreview(),
-                              ),
-                            ),
+                            Expanded(child: TwitterPreview()),
                             Expanded(child: WhatsAppPreview()),
-                            if (MediaQuery.of(context).size.width > 940)
+                            if (MediaQuery
+                                .of(context)
+                                .size
+                                .width > 940)
                               Expanded(child: ShazamPreview()),
                           ],
                         ),

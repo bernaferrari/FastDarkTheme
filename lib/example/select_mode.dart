@@ -6,8 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hsluv/hsluvcolor.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'blocs/color/color_bloc.dart';
-import 'blocs/color/color_event.dart';
+import 'blocs/color_cubit.dart';
 import 'blocs/mode.dart';
 
 class UpperMobileLayout extends StatelessWidget {
@@ -85,11 +84,7 @@ class SelectableItems extends StatelessWidget {
             groupValue: character,
             activeColor: Theme.of(context).colorScheme.primary,
             onChanged: (int value) {
-              BlocProvider.of<ColorBloc>(context).add(
-                ColorUpdateSingle(
-                  mode: selectable[i],
-                ),
-              );
+              context.bloc<ColorCubit>().mapSingleToState(mode: selectable[i]);
             },
           ),
       ],
@@ -126,12 +121,12 @@ class _ColorOutputState extends State<ColorOutput> {
   void copyToClipboard(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
 
-    Scaffold.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
     final snackBar = SnackBar(
       content: Text('$text copied'),
       duration: const Duration(milliseconds: 1000),
     );
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
