@@ -14,4 +14,17 @@ jobs:
       - run: flutter pub get
       - run: flutter config --enable-web
       - run: flutter test
-      - run: flutter build web
+      - run: |
+          cd example/
+          flutter pub get
+          flutter build web --release
+          git clone --single-branch "https://${{ secrets.PAT }}@github.com/bernaferrari/bernaferrari.github.io.git" "clone_dir"
+          rm -rf clone_dir/fastkdarktheme
+          cp -r build/web clone_dir/fastkdarktheme
+          cd clone_dir
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add *
+          git commit -m "generate fastkdarktheme"
+          git push
+      
