@@ -5,13 +5,13 @@ import 'color_luv_lum.dart';
 
 class PickerItem extends StatelessWidget {
   const PickerItem({
-    this.colorLuvLum,
-    this.onPressed,
-    this.currentValue,
+    required this.colorLuvLum,
+    required this.onPressed,
+    required this.currentValue,
   });
 
   final ColorLuvLum colorLuvLum;
-  final Function onPressed;
+  final VoidCallback onPressed;
   final int currentValue;
 
   @override
@@ -32,7 +32,8 @@ class PickerItem extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           colorLuvLum.luv.hue.round().toString(),
-          style: Theme.of(context).textTheme.caption.copyWith(color: textColor),
+          style:
+              Theme.of(context).textTheme.caption!.copyWith(color: textColor),
         ),
       ),
     );

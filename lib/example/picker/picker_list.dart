@@ -9,11 +9,11 @@ import 'picker_item.dart';
 
 class PickerList extends StatelessWidget {
   const PickerList({
-    this.currentValue,
-    this.sectionIndex,
-    this.listSize,
-    this.colorsList,
-    this.onColorPressed,
+    required this.currentValue,
+    required this.sectionIndex,
+    required this.listSize,
+    required this.colorsList,
+    required this.onColorPressed,
   });
 
   final Function(HSLuvColor) onColorPressed;

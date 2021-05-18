@@ -24,11 +24,11 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ColorCubit, ColorState>(
         builder: (BuildContext builderContext, ColorState state) {
-      final primary = state.rgbColors[kPrimary];
-      final background = state.rgbColors[kBackground];
-      final surface = state.rgbColors[kSurface];
+      final primary = state.rgbColors[kPrimary]!;
+      final background = state.rgbColors[kBackground]!;
+      final surface = state.rgbColors[kSurface]!;
 
-      final primaryLuv = state.hsluvColors[kPrimary];
+      final primaryLuv = state.hsluvColors[kPrimary]!;
 
       final int _character = Mode.values.indexOf(state.mode);
 
@@ -46,10 +46,10 @@ class MainScreen extends StatelessWidget {
           accentColor: primary,
           buttonTheme: Theme.of(context).buttonTheme.copyWith(
                 shape: RoundedRectangleBorder(
-                  side: BorderSide(width: 2),
+                  side: BorderSide(width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
-                height: 48,
+                height: 48.0,
               ),
           cardTheme: Theme.of(context).cardTheme,
         ),
@@ -83,11 +83,11 @@ class MainScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      if (MediaQuery.of(context).size.width < 400)
+                      if (MediaQuery.of(context).size.width < 400.0)
                         UpperMobileLayout(_character)
                       else
                         Card(
-                          margin: EdgeInsets.all(16),
+                          margin: EdgeInsets.all(16.0),
                           clipBehavior: Clip.antiAlias,
                           color: Colors.black,
                           child: Row(
@@ -106,42 +106,39 @@ class MainScreen extends StatelessWidget {
 //                        textAlign: TextAlign.center,
 //                        style: Theme.of(context).textTheme.headline6,
 //                      ),
-                      SizedBox(height: 8),
+                      SizedBox(height: 8.0),
                       if (MediaQuery.of(context).size.width > 650)
                         Row(
                           children: <Widget>[
                             Expanded(child: TwitterPreview()),
                             Expanded(child: WhatsAppPreview()),
-                            if (MediaQuery
-                                .of(context)
-                                .size
-                                .width > 940)
+                            if (MediaQuery.of(context).size.width > 940)
                               Expanded(child: ShazamPreview()),
                           ],
                         ),
                       if (MediaQuery.of(context).size.width <= 650) ...[
                         Card(
-                          margin: EdgeInsets.symmetric(horizontal: 16),
+                          margin: EdgeInsets.symmetric(horizontal: 16.0),
                           clipBehavior: Clip.antiAlias,
                           color: surface,
-                          elevation: 0,
+                          elevation: 0.0,
                           child: TwitterPreview(),
                         ),
-                        SizedBox(height: 16),
+                        SizedBox(height: 16.0),
                         Card(
-                          margin: EdgeInsets.symmetric(horizontal: 16),
+                          margin: EdgeInsets.symmetric(horizontal: 16.0),
                           clipBehavior: Clip.antiAlias,
                           color: background,
-                          elevation: 0,
+                          elevation: 0.0,
                           child: WhatsAppPreview(),
                         ),
                       ],
                       if (MediaQuery.of(context).size.width <= 940) ...[
-                        SizedBox(height: 16),
+                        SizedBox(height: 16.0),
                         ShazamPreview(),
-                        SizedBox(height: 16),
+                        SizedBox(height: 16.0),
                       ],
-                      SizedBox(height: 24),
+                      SizedBox(height: 24.0),
                     ],
                   ),
                 ),

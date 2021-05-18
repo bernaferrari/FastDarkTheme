@@ -12,9 +12,9 @@ class WhatsAppPreview extends StatelessWidget {
           Text(
             "11 participants",
             style:
-                Theme.of(context).textTheme.bodyText2.copyWith(color: primary),
+                Theme.of(context).textTheme.bodyText2!.copyWith(color: primary),
           ),
-          SizedBox(height: 8),
+          SizedBox(height: 8.0),
           ListTile(
             title: Text("Bernardo"),
             subtitle: Text("How are you doing?"),
@@ -22,13 +22,13 @@ class WhatsAppPreview extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 FeatherIcons.smile,
-                size: 24,
+                size: 24.0,
                 color: primary,
               ),
             ),
             trailing: Icon(
               FeatherIcons.check,
-              size: 16,
+              size: 16.0,
               color: primary,
             ),
           ),
@@ -39,13 +39,13 @@ class WhatsAppPreview extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 FeatherIcons.github,
-                size: 24,
+                size: 24.0,
                 color: primary,
               ),
             ),
             trailing: Icon(
               FeatherIcons.x,
-              size: 16,
+              size: 16.0,
               color: primary,
             ),
           ),

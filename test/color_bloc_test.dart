@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('CounterBloc', () {
-    ColorCubit colorBloc;
+    late ColorCubit colorBloc;
 
     setUp(() {
       colorBloc = ColorCubit();

@@ -10,8 +10,8 @@ import 'picker_list.dart';
 
 class HuePicker extends StatelessWidget {
   const HuePicker({
-    this.color,
-    this.hsluvColor,
+    required this.color,
+    required this.hsluvColor,
   });
 
   final Color color;
@@ -30,7 +30,7 @@ class HuePicker extends StatelessWidget {
   }
 
   void contrastColorSelected(BuildContext context, HSLuvColor color) {
-    context.bloc<ColorCubit>().mapSingleToState(
+    context.read<ColorCubit>().mapSingleToState(
           hsLuvColor: HSLuvColor.fromHSL(
             color.hue,
             color.saturation,

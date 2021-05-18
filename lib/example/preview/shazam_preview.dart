@@ -6,23 +6,23 @@ class ShazamPreview extends StatelessWidget {
     final surface = Theme.of(context).colorScheme.surface;
 
     return Card(
-      elevation: 0,
+      elevation: 0.0,
       color: surface,
       clipBehavior: Clip.antiAlias,
-      margin: EdgeInsets.symmetric(horizontal: 8),
+      margin: EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         children: <Widget>[
           Container(
             color: Colors.white24,
-            height: 60,
-            width: 60,
-            child: Icon(FeatherIcons.disc, size: 36, color: Colors.white38),
+            height: 60.0,
+            width: 60.0,
+            child: Icon(FeatherIcons.disc, size: 36.0, color: Colors.white38),
           ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 8),
+                SizedBox(height: 8.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
@@ -31,11 +31,11 @@ class ShazamPreview extends StatelessWidget {
                     maxLines: 1,
                     style: Theme.of(context)
                         .textTheme
-                        .headline6
-                        .copyWith(fontSize: 18, fontWeight: FontWeight.w700),
+                        .headline6!
+                        .copyWith(fontSize: 18.0, fontWeight: FontWeight.w700),
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: 4.0),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
@@ -44,7 +44,7 @@ class ShazamPreview extends StatelessWidget {
                     style: Theme.of(context).textTheme.caption,
                   ),
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 8.0),
               ],
             ),
           ),
@@ -74,13 +74,15 @@ class ShazamPreview extends StatelessWidget {
           ListTile(
             title: Text(
               "Suggestions",
-              style:
-                  Theme.of(context).textTheme.headline6.copyWith(fontSize: 18),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6!
+                  .copyWith(fontSize: 18.0),
             ),
             trailing: Text(
               "342",
-              style: Theme.of(context).textTheme.headline6.copyWith(
-                    fontSize: 16,
+              style: Theme.of(context).textTheme.headline6!.copyWith(
+                    fontSize: 16.0,
                     color: primary,
                   ),
             ),
@@ -88,23 +90,25 @@ class ShazamPreview extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 FeatherIcons.coffee,
-                size: 24,
+                size: 24.0,
                 color: Colors.white38,
               ),
             ),
           ),
-          Divider(indent: 72, height: 1),
+          Divider(indent: 72.0, height: 1.0),
           ListTile(
             title: Text(
               "Playlists For You",
-              style:
-                  Theme.of(context).textTheme.headline6.copyWith(fontSize: 18),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6!
+                  .copyWith(fontSize: 18.0),
             ),
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 FeatherIcons.music,
-                size: 24,
+                size: 24.0,
                 color: Colors.white38,
               ),
             ),

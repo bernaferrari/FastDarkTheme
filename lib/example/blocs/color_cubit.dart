@@ -42,7 +42,7 @@ class ColorCubit extends Cubit<ColorState> {
     final Map<String, HSLuvColor> luvMap = <String, HSLuvColor>{};
 
     for (String key in updatableMap.keys) {
-      luvMap[key] = HSLuvColor.fromColor(updatableMap[key]);
+      luvMap[key] = HSLuvColor.fromColor(updatableMap[key]!);
     }
 
     return luvMap;
@@ -54,29 +54,29 @@ class ColorCubit extends Cubit<ColorState> {
     Mode mode,
   ) {
     if (mode == Mode.WhatsApp) {
-      final hue1 = (allLuv[kPrimary].hue + 30) % 360;
+      final hue1 = (allLuv[kPrimary]!.hue + 30) % 360;
       allLuv[kSurface] = HSLuvColor.fromHSL(hue1, 40, 10);
-      allRgb[kSurface] = allLuv[kSurface].toColor();
+      allRgb[kSurface] = allLuv[kSurface]!.toColor();
 
-      final double hue2 = (allLuv[kPrimary].hue + 35) % 360;
+      final double hue2 = (allLuv[kPrimary]!.hue + 35) % 360;
       allLuv[kBackground] = HSLuvColor.fromHSL(hue2, 40, 5);
-      allRgb[kBackground] = allLuv[kBackground].toColor();
+      allRgb[kBackground] = allLuv[kBackground]!.toColor();
     } else if (mode == Mode.Twitter) {
-      final double hue = (allLuv[kPrimary].hue + 10) % 360;
+      final double hue = (allLuv[kPrimary]!.hue + 10) % 360;
 
       allLuv[kSurface] = HSLuvColor.fromHSL(hue, 35, 15);
-      allRgb[kSurface] = allLuv[kSurface].toColor();
+      allRgb[kSurface] = allLuv[kSurface]!.toColor();
 
       allLuv[kBackground] = HSLuvColor.fromHSL(hue, 30, 10);
-      allRgb[kBackground] = allLuv[kBackground].toColor();
+      allRgb[kBackground] = allLuv[kBackground]!.toColor();
     } else if (mode == Mode.Shazam) {
-      final double hue = math.max(allLuv[kPrimary].hue - 38, 0);
+      final double hue = math.max(allLuv[kPrimary]!.hue - 38, 0);
 
       allLuv[kSurface] = HSLuvColor.fromHSL(hue, 55, 10);
-      allRgb[kSurface] = allLuv[kSurface].toColor();
+      allRgb[kSurface] = allLuv[kSurface]!.toColor();
 
       allLuv[kBackground] = HSLuvColor.fromHSL(hue, 100, 5);
-      allRgb[kBackground] = allLuv[kBackground].toColor();
+      allRgb[kBackground] = allLuv[kBackground]!.toColor();
     }
 //    else if (mode == "Mix") {
 //      allLuv[kSurface] = HSLuvColor.fromHSL(allLuv[kSurface].hue, 50, 12);
@@ -106,9 +106,9 @@ class ColorCubit extends Cubit<ColorState> {
   }
 
   void mapSingleToState({
-    Color color,
-    HSLuvColor hsLuvColor,
-    Mode mode,
+    Color? color,
+    HSLuvColor? hsLuvColor,
+    Mode? mode,
   }) {
     final Map<String, HSLuvColor> allLuv = Map.from(state.hsluvColors);
     final Map<String, Color> allRgb = Map.from(state.rgbColors);
@@ -123,16 +123,16 @@ class ColorCubit extends Cubit<ColorState> {
 
     if (mode != null) {
       if (mode == Mode.WhatsApp) {
-        allLuv[kPrimary] = HSLuvColor.fromHSL(allLuv[kPrimary].hue, 100, 63);
+        allLuv[kPrimary] = HSLuvColor.fromHSL(allLuv[kPrimary]!.hue, 100, 63);
 //        allRgb[kPrimary] = Color(0xff00AC99);
       } else if (mode == Mode.Twitter) {
-        allLuv[kPrimary] = HSLuvColor.fromHSL(allLuv[kPrimary].hue, 97, 63);
+        allLuv[kPrimary] = HSLuvColor.fromHSL(allLuv[kPrimary]!.hue, 97, 63);
 //        allRgb[kPrimary] = Color(0xff1DA1F2);
       } else if (mode == Mode.Shazam) {
-        allLuv[kPrimary] = HSLuvColor.fromHSL(allLuv[kPrimary].hue, 100, 63);
+        allLuv[kPrimary] = HSLuvColor.fromHSL(allLuv[kPrimary]!.hue, 100, 63);
 //        allRgb[kPrimary] = Color(0xff005CCB);
       }
-      allRgb[kPrimary] = allLuv[kPrimary].toColor();
+      allRgb[kPrimary] = allLuv[kPrimary]!.toColor();
 //      allLuv[kPrimary] = HSLuvColor.fromColor(allRgb[kPrimary]);
     }
 

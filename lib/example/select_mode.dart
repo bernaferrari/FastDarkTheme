@@ -83,8 +83,8 @@ class SelectableItems extends StatelessWidget {
             value: i,
             groupValue: character,
             activeColor: Theme.of(context).colorScheme.primary,
-            onChanged: (int value) {
-              context.bloc<ColorCubit>().mapSingleToState(mode: selectable[i]);
+            onChanged: (int? value) {
+              context.read<ColorCubit>().mapSingleToState(mode: selectable[i]);
             },
           ),
       ],
@@ -98,7 +98,9 @@ class ColorOutput extends StatefulWidget {
 }
 
 class _ColorOutputState extends State<ColorOutput> {
-  int currentSegment;
+  late int currentSegment = PageStorage.of(context)
+          ?.readState(context, identifier: const ValueKey("Selectable")) ??
+      0;
 
   final Map<int, Widget> children = const <int, Widget>{
     0: Text("HEX"),
@@ -106,17 +108,6 @@ class _ColorOutputState extends State<ColorOutput> {
     2: Text("HSLuv"),
     3: Text("HSV"),
   };
-
-  @override
-  void initState() {
-    currentSegment = PageStorage.of(context).readState(
-          context,
-          identifier: const ValueKey("Selectable"),
-        ) ??
-        0;
-
-    super.initState();
-  }
 
   void copyToClipboard(BuildContext context, String text) {
     Clipboard.setData(ClipboardData(text: text));
@@ -166,14 +157,11 @@ class _ColorOutputState extends State<ColorOutput> {
     );
   }
 
-  void onValueChanged(int newValue) {
+  void onValueChanged(int? newValue) {
     setState(() {
-      currentSegment = newValue;
-      PageStorage.of(context).writeState(
-        context,
-        currentSegment,
-        identifier: const ValueKey("Selectable"),
-      );
+      currentSegment = newValue!;
+      PageStorage.of(context)?.writeState(context, currentSegment,
+          identifier: const ValueKey("Selectable"));
     });
   }
 }
