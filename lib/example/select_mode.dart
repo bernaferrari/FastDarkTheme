@@ -144,13 +144,11 @@ class _ColorOutputState extends State<ColorOutput> {
           ),
           SizedBox(height: 8),
           for (int i = 0; i < arr.length; i++)
-            RaisedButton(
-              color: arr[i],
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: arr[i]),
               child: Text(arr[i].retrieveColorStr(currentSegment)),
-              onPressed: () {
-                copyToClipboard(
-                    context, arr[i].retrieveColorStr(currentSegment));
-              },
+              onPressed: () => copyToClipboard(
+                  context, arr[i].retrieveColorStr(currentSegment)),
             ),
         ],
       ),
