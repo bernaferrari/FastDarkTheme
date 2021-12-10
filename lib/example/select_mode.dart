@@ -10,7 +10,7 @@ import 'blocs/color_cubit.dart';
 import 'blocs/mode.dart';
 
 class UpperMobileLayout extends StatelessWidget {
-  const UpperMobileLayout(this.character);
+  const UpperMobileLayout(this.character, {Key? key}) : super(key: key);
 
   final int character;
 
@@ -27,12 +27,12 @@ class UpperMobileLayout extends StatelessWidget {
             controller: controller,
             children: <Widget>[
               Card(
-                margin: EdgeInsets.only(right: 8),
+                margin: const EdgeInsets.only(right: 8),
                 clipBehavior: Clip.antiAlias,
                 color: Colors.black,
                 child: SelectableItems(character),
               ),
-              Card(
+              const Card(
                 margin: EdgeInsets.only(left: 8),
                 clipBehavior: Clip.antiAlias,
                 color: Colors.black,
@@ -60,18 +60,16 @@ class UpperMobileLayout extends StatelessWidget {
 }
 
 class SelectableItems extends StatelessWidget {
-  const SelectableItems(this.character);
+  const SelectableItems(this.character, {Key? key}) : super(key: key);
 
   final int character;
 
   @override
   Widget build(BuildContext context) {
-    final selectable = Mode.values;
+    const selectable = Mode.values;
 
     // the output of enum is Mode.WhatsApp, so remove the beginning.
-    final strSelectable = selectable
-        .map((d) => d.toString().replaceFirst("Mode.", ""))
-        .toList(growable: false);
+    final strSelectable = selectable.map((d) => d.name).toList(growable: false);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -93,6 +91,8 @@ class SelectableItems extends StatelessWidget {
 }
 
 class ColorOutput extends StatefulWidget {
+  const ColorOutput({Key? key}) : super(key: key);
+
   @override
   _ColorOutputState createState() => _ColorOutputState();
 }
@@ -142,11 +142,15 @@ class _ColorOutputState extends State<ColorOutput> {
             onValueChanged: onValueChanged,
             groupValue: currentSegment,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           for (int i = 0; i < arr.length; i++)
             ElevatedButton(
               style: ElevatedButton.styleFrom(primary: arr[i]),
-              child: Text(arr[i].retrieveColorStr(currentSegment)),
+              child: Text(
+                arr[i].retrieveColorStr(currentSegment),
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground),
+              ),
               onPressed: () => copyToClipboard(
                   context, arr[i].retrieveColorStr(currentSegment)),
             ),

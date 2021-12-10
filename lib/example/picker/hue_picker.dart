@@ -9,10 +9,8 @@ import 'color_luv_lum.dart';
 import 'picker_list.dart';
 
 class HuePicker extends StatelessWidget {
-  const HuePicker({
-    required this.color,
-    required this.hsluvColor,
-  });
+  const HuePicker({required this.color, required this.hsluvColor, Key? key})
+      : super(key: key);
 
   final Color color;
   final HSLuvColor hsluvColor;
@@ -50,7 +48,7 @@ class HuePicker extends StatelessWidget {
             ? ColorScheme.light(surface: color)
             : ColorScheme.dark(surface: color),
         textTheme: TextTheme(
-          caption: GoogleFonts.b612Mono(),
+          bodySmall: GoogleFonts.b612Mono(),
         ),
       ),
       child: SizedBox(

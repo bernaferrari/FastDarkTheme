@@ -1,6 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:hsluv/hsluvcolor.dart';
 import 'package:infinite_listview/infinite_listview.dart';
 
@@ -14,7 +15,8 @@ class PickerList extends StatelessWidget {
     required this.listSize,
     required this.colorsList,
     required this.onColorPressed,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final Function(HSLuvColor) onColorPressed;
 
@@ -69,12 +71,21 @@ class PickerList extends StatelessWidget {
 //          }),
 //    );
 
-    return InfiniteListView.builder(
-      scrollDirection: Axis.vertical,
-      key: PageStorageKey<String>("$sectionIndex"),
-      itemBuilder: (BuildContext context, int absoluteIndex) {
-        return colorCompare(absoluteIndex % listSize);
-      },
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(
+        dragDevices: {
+          PointerDeviceKind.touch,
+          PointerDeviceKind.mouse,
+        },
+        scrollbars: false,
+      ),
+      child: InfiniteListView.builder(
+        scrollDirection: Axis.vertical,
+        key: PageStorageKey<String>("$sectionIndex"),
+        itemBuilder: (BuildContext context, int absoluteIndex) {
+          return colorCompare(absoluteIndex % listSize);
+        },
+      ),
     );
   }
 }

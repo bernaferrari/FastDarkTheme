@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fastdarktheme/example/util/constants.dart';
 import 'package:hsluv/hsluvcolor.dart';
 
 import 'mode.dart';
@@ -15,8 +14,8 @@ class ColorState extends Equatable {
     this.mode,
   );
 
-  final Map<String, Color> rgbColors;
-  final Map<String, HSLuvColor> hsluvColors;
+  final Map<SchemeTypes, Color> rgbColors;
+  final Map<SchemeTypes, HSLuvColor> hsluvColors;
   final Mode mode;
 
   @override
@@ -30,18 +29,20 @@ class ColorCubit extends Cubit<ColorState> {
   ColorCubit() : super(_initialState());
 
   static ColorState _initialState({Mode mode = Mode.WhatsApp}) {
-    final Map<String, Color> allRgb = {kPrimary: Color(0xff00AB9A)};
-    final Map<String, HSLuvColor> allLuv = convertToHSLuv(allRgb);
+    final Map<SchemeTypes, Color> allRgb = {
+      SchemeTypes.primary: const Color(0xff00AB9A)
+    };
+    final Map<SchemeTypes, HSLuvColor> allLuv = convertToHSLuv(allRgb);
     convertColors(allLuv, allRgb, mode);
 
     return ColorState(allRgb, allLuv, mode);
   }
 
-  static Map<String, HSLuvColor> convertToHSLuv(
-      Map<String, Color> updatableMap) {
-    final Map<String, HSLuvColor> luvMap = <String, HSLuvColor>{};
+  static Map<SchemeTypes, HSLuvColor> convertToHSLuv(
+      Map<SchemeTypes, Color> updatableMap) {
+    final Map<SchemeTypes, HSLuvColor> luvMap = <SchemeTypes, HSLuvColor>{};
 
-    for (String key in updatableMap.keys) {
+    for (SchemeTypes key in updatableMap.keys) {
       luvMap[key] = HSLuvColor.fromColor(updatableMap[key]!);
     }
 
@@ -49,34 +50,37 @@ class ColorCubit extends Cubit<ColorState> {
   }
 
   static void convertColors(
-    Map<String, HSLuvColor> allLuv,
-    Map<String, Color> allRgb,
+    Map<SchemeTypes, HSLuvColor> allLuv,
+    Map<SchemeTypes, Color> allRgb,
     Mode mode,
   ) {
     if (mode == Mode.WhatsApp) {
-      final hue1 = (allLuv[kPrimary]!.hue + 30) % 360;
-      allLuv[kSurface] = HSLuvColor.fromHSL(hue1, 40, 10);
-      allRgb[kSurface] = allLuv[kSurface]!.toColor();
+      final hue1 = (allLuv[SchemeTypes.primary]!.hue + 30) % 360;
+      allLuv[SchemeTypes.surface] = HSLuvColor.fromHSL(hue1, 40, 10);
+      allRgb[SchemeTypes.surface] = allLuv[SchemeTypes.surface]!.toColor();
 
-      final double hue2 = (allLuv[kPrimary]!.hue + 35) % 360;
-      allLuv[kBackground] = HSLuvColor.fromHSL(hue2, 40, 5);
-      allRgb[kBackground] = allLuv[kBackground]!.toColor();
+      final double hue2 = (allLuv[SchemeTypes.primary]!.hue + 35) % 360;
+      allLuv[SchemeTypes.background] = HSLuvColor.fromHSL(hue2, 40, 5);
+      allRgb[SchemeTypes.background] =
+          allLuv[SchemeTypes.background]!.toColor();
     } else if (mode == Mode.Twitter) {
-      final double hue = (allLuv[kPrimary]!.hue + 10) % 360;
+      final double hue = (allLuv[SchemeTypes.primary]!.hue + 10) % 360;
 
-      allLuv[kSurface] = HSLuvColor.fromHSL(hue, 35, 15);
-      allRgb[kSurface] = allLuv[kSurface]!.toColor();
+      allLuv[SchemeTypes.surface] = HSLuvColor.fromHSL(hue, 35, 15);
+      allRgb[SchemeTypes.surface] = allLuv[SchemeTypes.surface]!.toColor();
 
-      allLuv[kBackground] = HSLuvColor.fromHSL(hue, 30, 10);
-      allRgb[kBackground] = allLuv[kBackground]!.toColor();
+      allLuv[SchemeTypes.background] = HSLuvColor.fromHSL(hue, 30, 10);
+      allRgb[SchemeTypes.background] =
+          allLuv[SchemeTypes.background]!.toColor();
     } else if (mode == Mode.Shazam) {
-      final double hue = math.max(allLuv[kPrimary]!.hue - 38, 0);
+      final double hue = math.max(allLuv[SchemeTypes.primary]!.hue - 38, 0);
 
-      allLuv[kSurface] = HSLuvColor.fromHSL(hue, 55, 10);
-      allRgb[kSurface] = allLuv[kSurface]!.toColor();
+      allLuv[SchemeTypes.surface] = HSLuvColor.fromHSL(hue, 55, 10);
+      allRgb[SchemeTypes.surface] = allLuv[SchemeTypes.surface]!.toColor();
 
-      allLuv[kBackground] = HSLuvColor.fromHSL(hue, 100, 5);
-      allRgb[kBackground] = allLuv[kBackground]!.toColor();
+      allLuv[SchemeTypes.background] = HSLuvColor.fromHSL(hue, 100, 5);
+      allRgb[SchemeTypes.background] =
+          allLuv[SchemeTypes.background]!.toColor();
     }
 //    else if (mode == "Mix") {
 //      allLuv[kSurface] = HSLuvColor.fromHSL(allLuv[kSurface].hue, 50, 12);
@@ -88,11 +92,11 @@ class ColorCubit extends Cubit<ColorState> {
   }
 
   void mapAllToState(List<Color> colors) {
-    final Map<String, Color> allRgb = Map.from(state.rgbColors);
+    final Map<SchemeTypes, Color> allRgb = Map.from(state.rgbColors);
 
     int i = 0;
-    allRgb.forEach((String title, Color b) {
-      allRgb[title] = colors[i];
+    allRgb.forEach((SchemeTypes key, Color b) {
+      allRgb[key] = colors[i];
       i += 1;
     });
 
@@ -110,29 +114,32 @@ class ColorCubit extends Cubit<ColorState> {
     HSLuvColor? hsLuvColor,
     Mode? mode,
   }) {
-    final Map<String, HSLuvColor> allLuv = Map.from(state.hsluvColors);
-    final Map<String, Color> allRgb = Map.from(state.rgbColors);
+    final Map<SchemeTypes, HSLuvColor> allLuv = Map.from(state.hsluvColors);
+    final Map<SchemeTypes, Color> allRgb = Map.from(state.rgbColors);
 
     if (color != null) {
-      allLuv[kPrimary] = HSLuvColor.fromColor(color);
-      allRgb[kPrimary] = color;
+      allLuv[SchemeTypes.primary] = HSLuvColor.fromColor(color);
+      allRgb[SchemeTypes.primary] = color;
     } else if (hsLuvColor != null) {
-      allLuv[kPrimary] = hsLuvColor;
-      allRgb[kPrimary] = hsLuvColor.toColor();
+      allLuv[SchemeTypes.primary] = hsLuvColor;
+      allRgb[SchemeTypes.primary] = hsLuvColor.toColor();
     }
 
     if (mode != null) {
       if (mode == Mode.WhatsApp) {
-        allLuv[kPrimary] = HSLuvColor.fromHSL(allLuv[kPrimary]!.hue, 100, 63);
+        allLuv[SchemeTypes.primary] =
+            HSLuvColor.fromHSL(allLuv[SchemeTypes.primary]!.hue, 100, 63);
 //        allRgb[kPrimary] = Color(0xff00AC99);
       } else if (mode == Mode.Twitter) {
-        allLuv[kPrimary] = HSLuvColor.fromHSL(allLuv[kPrimary]!.hue, 97, 63);
+        allLuv[SchemeTypes.primary] =
+            HSLuvColor.fromHSL(allLuv[SchemeTypes.primary]!.hue, 97, 63);
 //        allRgb[kPrimary] = Color(0xff1DA1F2);
       } else if (mode == Mode.Shazam) {
-        allLuv[kPrimary] = HSLuvColor.fromHSL(allLuv[kPrimary]!.hue, 100, 63);
+        allLuv[SchemeTypes.primary] =
+            HSLuvColor.fromHSL(allLuv[SchemeTypes.primary]!.hue, 100, 63);
 //        allRgb[kPrimary] = Color(0xff005CCB);
       }
-      allRgb[kPrimary] = allLuv[kPrimary]!.toColor();
+      allRgb[SchemeTypes.primary] = allLuv[SchemeTypes.primary]!.toColor();
 //      allLuv[kPrimary] = HSLuvColor.fromColor(allRgb[kPrimary]);
     }
 

@@ -14,25 +14,25 @@ description: Fast Dark Theme
 version: 1.0.1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.15.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   hsluv: ^1.1.2
-  bloc: ^7.0.0
-  flutter_bloc: ^7.0.1
+  bloc: ^8.0.1
+  flutter_bloc: ^8.0.0
   equatable: ^2.0.3
   flutter_feather_icons: ^2.0.0+1
   infinite_listview: ^1.1.0
-  url_launcher: ^6.0.2
-  path_provider: ^2.0.2
+  url_launcher: ^6.0.17
+  path_provider: ^2.0.8
   google_fonts: ^2.1.0
-  smooth_page_indicator: ^0.3.0-nullsafety.0
+  smooth_page_indicator: ^1.0.0+2
 
 dev_dependencies:
-  build_runner: ^2.0.4
-  flutter_lints: ^1.0.3
+  build_runner: ^2.1.5
+  flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
 

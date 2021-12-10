@@ -8,7 +8,8 @@ class PickerItem extends StatelessWidget {
     required this.colorLuvLum,
     required this.onPressed,
     required this.currentValue,
-  });
+    Key? key,
+  }) : super(key: key);
 
   final ColorLuvLum colorLuvLum;
   final VoidCallback onPressed;
@@ -33,7 +34,7 @@ class PickerItem extends StatelessWidget {
         child: Text(
           colorLuvLum.luv.hue.round().toString(),
           style:
-              Theme.of(context).textTheme.caption!.copyWith(color: textColor),
+              Theme.of(context).textTheme.bodySmall!.copyWith(color: textColor),
         ),
       ),
     );

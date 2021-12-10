@@ -1,7 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'example/blocs/color_cubit.dart';
@@ -10,27 +7,30 @@ import 'example/main_screen.dart';
 import 'example/util/constants.dart';
 
 Future<void> main() async {
-  Bloc.observer = SimpleBlocObserver();
-  runApp(MainApp());
+  BlocOverrides.runZoned(() {}, blocObserver: SimpleBlocObserver());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
+  const MainApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Navigator(
         pages: [
           MaterialPage<dynamic>(
-            key: ValueKey('MainPage'),
+            key: const ValueKey('MainPage'),
             child: BlocProvider(
               create: (context) => ColorCubit(),
-              child: MainScreen(),
+              child: const MainScreen(),
             ),
           ),
         ],
         onPopPage: (route, dynamic result) => route.didPop(result),
       ),
       theme: ThemeData(
+        visualDensity: VisualDensity.standard,
         typography: Typography.material2018(
           black: Typography.dense2018,
           tall: Typography.tall2018,

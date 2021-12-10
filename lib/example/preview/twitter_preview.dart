@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 
 class TwitterPreview extends StatelessWidget {
+  const TwitterPreview({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final primary = Theme.of(context).colorScheme.primary;
-    final surface = Theme.of(context).colorScheme.surface;
 
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16.0),
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
       clipBehavior: Clip.antiAlias,
-      color: surface,
+      color: Theme.of(context).colorScheme.surface,
       elevation: 0.0,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -22,7 +23,7 @@ class TwitterPreview extends StatelessWidget {
               "Who to follow",
               style: Theme.of(context)
                   .textTheme
-                  .headline6!
+                  .titleLarge!
                   .copyWith(fontWeight: FontWeight.w900),
             ),
           ),
@@ -31,8 +32,8 @@ class TwitterPreview extends StatelessWidget {
             height: 1.0,
           ),
           ListTile(
-            title: Text("Shipping"),
-            subtitle: Text("@company"),
+            title: const Text("Shipping"),
+            subtitle: const Text("@company"),
             leading: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
@@ -59,7 +60,7 @@ class TwitterPreview extends StatelessWidget {
                   "Follow",
                   style: Theme.of(context)
                       .textTheme
-                      .bodyText1!
+                      .bodyLarge!
                       .copyWith(color: primary),
                 ),
                 onPressed: () {},
@@ -72,12 +73,12 @@ class TwitterPreview extends StatelessWidget {
           ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
             child: Text(
               "View more",
               style: Theme.of(context)
                   .textTheme
-                  .bodyText2!
+                  .bodyMedium!
                   .copyWith(color: primary),
             ),
           ),
