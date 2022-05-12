@@ -73,7 +73,7 @@ class TwitterPreview extends StatelessWidget {
           ),
           Padding(
             padding:
-            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
             child: Text(
               "View more",
               style: Theme.of(context)

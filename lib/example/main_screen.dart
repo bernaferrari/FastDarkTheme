@@ -40,52 +40,52 @@ class MainScreen extends StatelessWidget {
           ),
           textTheme: TextTheme(
             button: GoogleFonts.b612Mono(),
-              ),
-            ).copyWith(
-              buttonTheme: Theme.of(context).buttonTheme.copyWith(
+          ),
+        ).copyWith(
+          buttonTheme: Theme.of(context).buttonTheme.copyWith(
                 shape: const RoundedRectangleBorder(
                   side: BorderSide(width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
                 height: 48.0,
               ),
-              cardTheme: Theme.of(context).cardTheme,
-            ),
-            child: Scaffold(
-              body: Row(
-                children: <Widget>[
-                  HuePicker(
-                    color: primary,
-                    hsluvColor: primaryLuv,
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: <Widget>[
-                          SafeArea(
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: IconButton(
-                                  icon: const Icon(FeatherIcons.github),
+          cardTheme: Theme.of(context).cardTheme,
+        ),
+        child: Scaffold(
+          body: Row(
+            children: <Widget>[
+              HuePicker(
+                color: primary,
+                hsluvColor: primaryLuv,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      SafeArea(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: Align(
+                            alignment: Alignment.topRight,
+                            child: IconButton(
+                              icon: const Icon(FeatherIcons.github),
                               tooltip: "GitHub",
                               onPressed: () async {
-                                await launch(
-                                    "https://github.com/bernaferrari/fastdarktheme");
+                                await launchUrl(Uri.parse(
+                                    "https://github.com/bernaferrari/fastdarktheme"));
                               },
                             ),
-                              ),
-                            ),
                           ),
-                          if (MediaQuery.of(context).size.width < 400.0)
-                            UpperMobileLayout(selectedIndex)
+                        ),
+                      ),
+                      if (MediaQuery.of(context).size.width < 400.0)
+                        UpperMobileLayout(selectedIndex)
                       else
-                            Card(
-                              margin: const EdgeInsets.all(16.0),
+                        Card(
+                          margin: const EdgeInsets.all(16.0),
                           clipBehavior: Clip.antiAlias,
                           color: Colors.black,
                           child: Row(
@@ -134,13 +134,13 @@ class MainScreen extends StatelessWidget {
                       ],
                       const SizedBox(height: 24.0),
                     ],
-                      ),
-                    ),
                   ),
-                ],
+                ),
               ),
-            ),
-          );
-        });
+            ],
+          ),
+        ),
+      );
+    });
   }
 }
