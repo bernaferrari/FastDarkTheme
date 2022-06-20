@@ -28,7 +28,7 @@ class ColorState extends Equatable {
 class ColorCubit extends Cubit<ColorState> {
   ColorCubit() : super(_initialState());
 
-  static ColorState _initialState({Mode mode = Mode.WhatsApp}) {
+  static ColorState _initialState({Mode mode = Mode.whatsapp}) {
     final Map<SchemeTypes, Color> allRgb = {
       SchemeTypes.primary: const Color(0xff00AB9A)
     };
@@ -54,7 +54,7 @@ class ColorCubit extends Cubit<ColorState> {
     Map<SchemeTypes, Color> allRgb,
     Mode mode,
   ) {
-    if (mode == Mode.WhatsApp) {
+    if (mode == Mode.whatsapp) {
       final hue1 = (allLuv[SchemeTypes.primary]!.hue + 30) % 360;
       allLuv[SchemeTypes.surface] = HSLuvColor.fromHSL(hue1, 40, 10);
       allRgb[SchemeTypes.surface] = allLuv[SchemeTypes.surface]!.toColor();
@@ -63,7 +63,7 @@ class ColorCubit extends Cubit<ColorState> {
       allLuv[SchemeTypes.background] = HSLuvColor.fromHSL(hue2, 40, 5);
       allRgb[SchemeTypes.background] =
           allLuv[SchemeTypes.background]!.toColor();
-    } else if (mode == Mode.Twitter) {
+    } else if (mode == Mode.twitter) {
       final double hue = (allLuv[SchemeTypes.primary]!.hue + 10) % 360;
 
       allLuv[SchemeTypes.surface] = HSLuvColor.fromHSL(hue, 35, 15);
@@ -72,7 +72,7 @@ class ColorCubit extends Cubit<ColorState> {
       allLuv[SchemeTypes.background] = HSLuvColor.fromHSL(hue, 30, 10);
       allRgb[SchemeTypes.background] =
           allLuv[SchemeTypes.background]!.toColor();
-    } else if (mode == Mode.Shazam) {
+    } else if (mode == Mode.shazam) {
       final double hue = math.max(allLuv[SchemeTypes.primary]!.hue - 38, 0);
 
       allLuv[SchemeTypes.surface] = HSLuvColor.fromHSL(hue, 55, 10);
@@ -126,15 +126,15 @@ class ColorCubit extends Cubit<ColorState> {
     }
 
     if (mode != null) {
-      if (mode == Mode.WhatsApp) {
+      if (mode == Mode.whatsapp) {
         allLuv[SchemeTypes.primary] =
             HSLuvColor.fromHSL(allLuv[SchemeTypes.primary]!.hue, 100, 63);
 //        allRgb[kPrimary] = Color(0xff00AC99);
-      } else if (mode == Mode.Twitter) {
+      } else if (mode == Mode.twitter) {
         allLuv[SchemeTypes.primary] =
             HSLuvColor.fromHSL(allLuv[SchemeTypes.primary]!.hue, 97, 63);
 //        allRgb[kPrimary] = Color(0xff1DA1F2);
-      } else if (mode == Mode.Shazam) {
+      } else if (mode == Mode.shazam) {
         allLuv[SchemeTypes.primary] =
             HSLuvColor.fromHSL(allLuv[SchemeTypes.primary]!.hue, 100, 63);
 //        allRgb[kPrimary] = Color(0xff005CCB);

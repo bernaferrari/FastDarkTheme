@@ -69,7 +69,8 @@ class SelectableItems extends StatelessWidget {
     const selectable = Mode.values;
 
     // the output of enum is Mode.WhatsApp, so remove the beginning.
-    final strSelectable = selectable.map((d) => d.name).toList(growable: false);
+    final strSelectable =
+        selectable.map((d) => d.value).toList(growable: false);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,

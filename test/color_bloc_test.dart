@@ -11,7 +11,7 @@ void main() {
     });
 
     test('initial state', () {
-      expect(colorBloc.state.mode, Mode.WhatsApp);
+      expect(colorBloc.state.mode, Mode.whatsapp);
     });
   });
 }
