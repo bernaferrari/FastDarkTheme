@@ -39,7 +39,7 @@ class MainScreen extends StatelessWidget {
             background: background,
           ),
           textTheme: TextTheme(
-            button: GoogleFonts.b612Mono(),
+            labelLarge: GoogleFonts.b612Mono(),
           ),
         ).copyWith(
           buttonTheme: Theme.of(context).buttonTheme.copyWith(

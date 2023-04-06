@@ -47,9 +47,9 @@ class TwitterPreview extends StatelessWidget {
               height: 36.0,
               child: OutlinedButton(
                 style: OutlinedButton.styleFrom(
+                  foregroundColor: primary,
                   padding: EdgeInsets.zero,
                   elevation: 0.0,
-                  primary: primary,
                   textStyle: TextStyle(color: primary),
                   side: BorderSide(color: primary),
                   shape: RoundedRectangleBorder(

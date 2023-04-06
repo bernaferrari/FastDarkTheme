@@ -100,7 +100,7 @@ class ColorOutput extends StatefulWidget {
 
 class _ColorOutputState extends State<ColorOutput> {
   late int currentSegment = PageStorage.of(context)
-          ?.readState(context, identifier: const ValueKey("Selectable")) ??
+          .readState(context, identifier: const ValueKey("Selectable")) ??
       0;
 
   final Map<int, Widget> children = const <int, Widget>{
@@ -146,7 +146,7 @@ class _ColorOutputState extends State<ColorOutput> {
           const SizedBox(height: 8),
           for (int i = 0; i < arr.length; i++)
             ElevatedButton(
-              style: ElevatedButton.styleFrom(primary: arr[i]),
+              style: ElevatedButton.styleFrom(backgroundColor: arr[i]),
               child: Text(
                 arr[i].retrieveColorStr(currentSegment),
                 style: TextStyle(
@@ -163,7 +163,7 @@ class _ColorOutputState extends State<ColorOutput> {
   void onValueChanged(int? newValue) {
     setState(() {
       currentSegment = newValue!;
-      PageStorage.of(context)?.writeState(context, currentSegment,
+      PageStorage.of(context).writeState(context, currentSegment,
           identifier: const ValueKey("Selectable"));
     });
   }
