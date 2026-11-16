@@ -5,9 +5,7 @@
 This project is a Flutter web experiment. It allows you to prototype dark mode colors based on popular apps: WhatsApp, Twitter and Shazam.
 You can select the Hue value you want, and the project will select everything else.
 
-<a href="https://bernaferrari.github.io/fastdarktheme"><img src="assets/try_here.png" height="50"/></a>
-
-[<p align="center"><img src="assets/preview.png" alt="Fast Dark Theme"></p>](https://bernaferrari.github.io/fastdarktheme/)
+<p align="center"><img src="assets/preview.png" alt="Fast Dark Theme"></p>
 
 I used a standard color picker to capture primary, surface and background color for these apps and converted them to HSLuv in my [Color Studio](https://github.com/bernaferrari/color-studio) app.
 This project doesn't have a 100% fidelity with them, but is close enough - Shazam's background, for instance, has a luminescence of 4. That was rounded to 5.
